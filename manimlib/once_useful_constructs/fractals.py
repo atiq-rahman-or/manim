@@ -1,3 +1,4 @@
+import secrets
 from functools import reduce
 import random
 
@@ -43,7 +44,7 @@ def fractalification_iteration(vmobject, dimension=1.05, num_inserted_anchors_ra
         ]
         new_anchors = []
         for p1, p2, in zip(original_anchors, original_anchors[1:]):
-            num_inserts = random.choice(num_inserted_anchors_range)
+            num_inserts = secrets.choice(num_inserted_anchors_range)
             inserted_points = [
                 interpolate(p1, p2, alpha)
                 for alpha in np.linspace(0, 1, num_inserts + 2)[1:-1]
@@ -205,13 +206,15 @@ class PiCreatureFractal(VMobject):
             for pi in self.get_family()
             if isinstance(pi, PiCreature)
         ]
+        # OpenRefactory Warning: Pseudorandom number generators should be avoided.
         random.seed(self.random_seed)
         for pi in reversed(internal_pis):
-            color = random.choice(self.colors)
+            color = secrets.choice(self.colors)
             pi.set_color(color)
             pi.set_stroke(color, width=0)
 
     def init_points(self):
+        # OpenRefactory Warning: Pseudorandom number generators should be avoided.
         random.seed(self.random_seed)
         modes = get_all_pi_creature_modes()
         seed = PiCreature(mode=self.start_mode)
@@ -224,7 +227,7 @@ class PiCreatureFractal(VMobject):
             for creature in creatures:
                 for eye, vect in zip(creature.eyes, [LEFT, RIGHT]):
                     new_creature = PiCreature(
-                        mode=random.choice(modes)
+                        mode=secrets.choice(modes)
                     )
                     new_creature.set_height(
                         self.scale_val * eye.get_height()
@@ -235,7 +238,7 @@ class PiCreatureFractal(VMobject):
                         aligned_edge=DOWN
                     )
                     new_creatures.append(new_creature)
-                creature.look_at(random.choice(new_creatures))
+                creature.look_at(secrets.choice(new_creatures))
             self.add_to_back(VGroup(*new_creatures))
             creatures = new_creatures
 
