@@ -144,6 +144,23 @@ class SceneFileWriter(object):
                 return
         else:
             user_name = input(f"Enter mobject file name (default is {default_name}): ")
+            '''
+            ***************** OpenRefactory Warning *****************
+            Possible Path manipulation attack!
+            Path:
+            	File: scene_file_writer.py, Line: 128
+            		default_name = str(mobject) + "_0.mob"
+            		Variable default_name is assigned a tainted value which is passed through a method invocation.
+            	File: scene_file_writer.py, Line: 131
+            		default_name = default_name.replace(str(index), str(index + 1))
+            		Variable default_name is assigned a tainted value.
+            	File: scene_file_writer.py, Line: 146
+            		user_name = input(f"Enter mobject file name (default is {default_name}): ")
+            		Variable user_name is assigned a tainted value from an external source.
+            	File: scene_file_writer.py, Line: 147
+            		file_path = os.path.join(directory, user_name or default_name)
+            		Tainted information is used in a sink.
+            '''
             file_path = os.path.join(directory, user_name or default_name)
             if os.path.exists(file_path) or os.path.exists(file_path + ".mob"):
                 if input(f"{file_path} already exists. Overwrite (y/n)? ") != "y":
