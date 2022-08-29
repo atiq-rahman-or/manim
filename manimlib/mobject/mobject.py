@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import copy
+import secrets
 from functools import wraps
 import itertools as it
 import os
 import pickle
-import random
 import sys
 
 import moderngl
@@ -517,7 +517,7 @@ class Mobject(object):
         if recurse:
             for submob in self.submobjects:
                 submob.shuffle(recurse=True)
-        random.shuffle(self.submobjects)
+        secrets.SystemRandom().shuffle(self.submobjects)
         self.assemble_family()
         return self
 
