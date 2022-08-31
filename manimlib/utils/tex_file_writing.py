@@ -86,6 +86,34 @@ def tex_to_dvi(tex_file: str) -> str:
             ">",
             os.devnull
         ]
+        '''
+        ***************** OpenRefactory Warning *****************
+        Possible OS command injection!
+        Path:
+        	File: tex_file_writing.py, Line: 75
+        		tex_config = get_tex_config()
+        		Variable tex_config is assigned a tainted value.
+        	File: tex_file_writing.py, Line: 76
+        		program = tex_config["executable"]
+        		Variable program is assigned a tainted value.
+        	File: tex_file_writing.py, Line: 77
+        		file_type = tex_config["intermediate_filetype"]
+        		Variable file_type is assigned a tainted value.
+        	File: tex_file_writing.py, Line: 80
+        		commands = [
+        		            program,
+        		            "-interaction=batchmode",
+        		            "-halt-on-error",
+        		            f"-output-directory=\"{os.path.dirname(tex_file)}\"",
+        		            f"\"{tex_file}\"",
+        		            ">",
+        		            os.devnull
+        		        ]
+        		Variable commands is assigned a tainted value.
+        	File: tex_file_writing.py, Line: 89
+        		exit_code = os.system(" ".join(commands))
+        		Tainted information is passed through a method invocation and is used in a sink.
+        '''
         exit_code = os.system(" ".join(commands))
         if exit_code != 0:
             log_file = tex_file.replace(".tex", ".log")
