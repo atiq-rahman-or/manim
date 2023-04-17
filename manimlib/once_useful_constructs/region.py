@@ -1,6 +1,7 @@
 from copy import deepcopy
 import itertools as it
 
+# OpenRefactory Warning: Importing every public name using star import should be avoided.
 from manimlib.constants import *
 from manimlib.mobject.mobject import Mobject
 from manimlib.utils.iterables import adjacent_pairs
