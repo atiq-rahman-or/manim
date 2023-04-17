@@ -1,6 +1,7 @@
 from functools import reduce
 import random
 
+# OpenRefactory Warning: Importing every public name using star import should be avoided.
 from manimlib.constants import *
 # from manimlib.for_3b1b_videos.pi_creature import PiCreature
 # from manimlib.for_3b1b_videos.pi_creature import Randolph
