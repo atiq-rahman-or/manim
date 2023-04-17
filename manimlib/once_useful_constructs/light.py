@@ -1,4 +1,5 @@
-from traceback import *
+# OpenRefactory Warning: Importing every public name using star import should be avoided.
+    from traceback import *
 
 from scipy.spatial import ConvexHull
 
@@ -6,6 +7,7 @@ from manimlib.animation.composition import LaggedStartMap
 from manimlib.animation.fading import FadeIn
 from manimlib.animation.fading import FadeOut
 from manimlib.animation.transform import Transform
+# OpenRefactory Warning: Importing every public name using star import should be avoided.
 from manimlib.constants import *
 from manimlib.mobject.geometry import AnnularSector
 from manimlib.mobject.geometry import Annulus
