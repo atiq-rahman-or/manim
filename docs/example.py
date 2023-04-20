@@ -1,4 +1,5 @@
-from manimlib import *
+# OpenRefactory Warning: Importing every public name using star import should be avoided.
+    from manimlib import *
 
 class SquareToCircle(Scene):
     def construct(self):
